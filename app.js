@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var eventHolder= 0;
-    var runFunc;
+    var funcHolder = '';
     var first = '';
     var second = '';
        
@@ -120,34 +120,53 @@ $(document).ready(function() {
     //click event for the six operators 
    
     $('#loginm').click(function() {
-       var runFunc = function(){ return subtract(numberHolder.first.join(), numberHolder.second.join())}
+       funcHolder = 'subtract'
        eventHolder += 1
     });
     
     $('#logind').click(function() {
-        var runFunc = function(){ return divide(numberHolder.first.join(), numberHolder.second.join())}
-       eventHolder += 1
+        funcHolder = 'divide'
+        eventHolder += 1
     });
     
     $('#loginp').click(function() {
-        var runFunc = function(){ return add(numberHolder.first.join(), numberHolder.second.join())}
-       eventHolder += 1
+        funcHolder = 'add'
+        eventHolder += 1
     });
     
     $('#loginmt').click(function() {
-        var runFunc = function(){ return multiply(numberHolder.first, numberHolder.second)}
-       eventHolder += 1
+        funcHolder = 'multiply'
+        eventHolder += 1
     });
     
     $('#logineq').click(function() {
-        runFunc();
-        eventHolder = 0
+        var total = 0
+        eventHolder = 0;
+        switch(funcHolder) {
+            case 'subtract':
+                total = subtract(first, second)
+                break;
+            case 'divide':
+                total = divide(first, second)
+                break;
+            case 'add':
+                total = add(first, second)
+                break;
+            case 'multiply':
+                total = multiply(first, second)
+                break;
+        };
+        first = '';
+        second = '';
+        console.log(total);
     });
     
     $('#logincl').click(function() {
-       numberHolder.first = [];
-       numberHolder.second = [];
-       eventHolder = 0;
+        first = '';
+        second = '';
+        eventHolder = 0;
+        console.log(first, second);
+        
     });
     
 
